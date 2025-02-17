@@ -42,7 +42,7 @@ public class UserController {
 
     @PostMapping("/")
     public ResponseEntity getUser(@RequestBody UserModel usermodel) {
-        var user = this.userRepository.findByNome(usermodel.getNome());
+        var user = this.userRepository.findByUsername(usermodel.getUsername());
 
         if (user != null) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("ja cadstrado");
