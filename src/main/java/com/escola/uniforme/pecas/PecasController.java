@@ -17,8 +17,10 @@ public class PecasController {
 
     @PostMapping("/")
     public PecasModel create(@RequestBody PecasModel pecasModel) {
+        System.out.println("chegou no controler do peças");
         var pecas = this.pecasRepository.save(pecasModel);  
         return pecas;
+
     }
     
     

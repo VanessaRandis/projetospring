@@ -46,19 +46,23 @@ public class UserController {
 
         if (user != null) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("ja cadstrado");
-        }
+        }else {
 
-        var passwordHashred = BCrypt.withDefaults()
+            var passwordHashred = BCrypt.withDefaults()
                 .hashToString(12, usermodel.getPassword().toCharArray());
 
-        usermodel.setPassword(passwordHashred);
+            usermodel.setPassword(passwordHashred);
 
-        var emailHash = BCrypt.withDefaults()
+             var emailHash = BCrypt.withDefaults()
                 .hashToString(12, usermodel.getEmail().toCharArray());
 
-        usermodel.setEmail(emailHash);
-        var userteste = this.userRepository.save(usermodel);
-        return ResponseEntity.status(HttpStatus.CREATED).body(userteste);
+             usermodel.setEmail(emailHash);
+            var userteste = this.userRepository.save(usermodel);
+            return ResponseEntity.status(HttpStatus.CREATED).body(userteste);
+
+        }
+
+
 
         }
 
