@@ -24,59 +24,48 @@ public class FilterPecasAuth extends OncePerRequestFilter {
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain)
             throws ServletException, IOException {
-                filterChain.doFilter(request, response);
-
-                /*var servletPath = request.getServletPath();
+               
+                var servletPath = request.getServletPath();
                 if (servletPath.equals("/pecas/")) {
+                    var authorization = request.getHeader("Authorization");
+                    System.out.println("Authorization");
+                    System.out.println(authorization);
+                    var usuario_password = authorization.substring("Basic".length()).trim();
+                    System.out.println(usuario_password);
+    
+                    byte [] authDecode = Base64.getDecoder().decode(usuario_password);
+    
+                    System.out.println(authDecode);
+    
+                    var authString = new String (authDecode);
+    
+                    System.out.println(authString);
+    
+                    String [] credentials = authString.split(":");
+                    String username = credentials[0];
+                    String password = credentials[1];
+                    System.out.println("username: "+ username);
+                    System.out.println("password: " + password);
 
-                 //pegar a autentação
-                var authorization = request.getHeader("Authorization");
-                System.out.println("Authorization");
-                System.out.println(authorization);
+                        var user = this.userRepository.findByUsername(username);
+                        if(user== null) {
+                            response.sendError(401, "Usuário sem autorização");
+                        } else {
+                            var passwordVerify = BCrypt.verifyer().verify(password.toCharArray(), user.getPassword());
+                                if(passwordVerify.verified) {
+                                    System.out.println("VERIFICANDO 1");
+                                    filterChain.doFilter(request, response);
+                                }else {
+                                    response.sendError(401);
+                            }
 
-                var usuario_password = authorization.substring("Basic".length()).trim();
-                System.out.println(usuario_password);
-
-                byte [] authDecode = Base64.getDecoder().decode(usuario_password);
-
-                System.out.println(authDecode);
-
-                var authString = new String (authDecode);
-
-                System.out.println(authString);
-
-                String [] credentials = authString.split(":");
-                String username = credentials[0];
-                String password = credentials[1];
-
-                System.out.println("username: "+ username);
-                System.out.println("password: " + password);
-
-
-                var user = this.userRepository.findByUsername(username);
-                if (user == null) {
-                        response.sendError(401);
-
-                }else {
-
-                    var passwordVerify = BCrypt.verifyer().verify(password.toCharArray(), user.getPassword());
-                    if (passwordVerify.verified){
-                        filterChain.doFilter(request, response);
-                    }else {
-                        response.sendError(401);
                     }
-                    
-                }
-
-                //validar a exsitencia do usuario
-                //valida senha
-                //segue os passos do projeto
-             
-
-                 }else {
+         
+                }else {
+                    System.out.println("VERIFICANDO 2");
                     filterChain.doFilter(request, response);
-                 }*/
-             
+                }
+                System.out.println("codigo aqui");
 
     }
     
