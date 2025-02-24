@@ -3,6 +3,7 @@ package com.escola.uniforme.pecas;
 import java.time.LocalDateTime;
 import java.util.UUID;
 
+import jakarta.annotation.Nonnull;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -39,6 +40,7 @@ public class PecasModel {
     private LocalDateTime endAt;
     private String priority; 
 
+    @Nonnull
     private UUID idUser;
  
 
