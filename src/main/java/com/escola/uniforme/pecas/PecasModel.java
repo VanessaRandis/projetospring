@@ -37,7 +37,7 @@ public class PecasModel {
     private String descricao;
     private LocalDateTime startAt;
     private LocalDateTime endAt;
-    private String priority;
+    private String priority; 
 
     private UUID idUser;
  

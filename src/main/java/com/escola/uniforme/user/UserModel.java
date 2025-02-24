@@ -26,6 +26,7 @@ public class UserModel {
     private String nome;
     private String username;
     
+    
     private String email;
     private String telefone;
 
